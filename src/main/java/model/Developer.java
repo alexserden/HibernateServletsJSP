@@ -1,7 +1,5 @@
 package model;
 
-import org.hibernate.annotations.NotFound;
-import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -10,11 +8,23 @@ import java.util.Set;
 @Table(name = "developer")
 public class Developer {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
+
+    @Column(name = "first_name")
     private String firstName;
+    @Column(name = "last_name")
     private String lastName;
+    @Column(name = "specialty")
     private String specialty;
+    @OneToOne
+    @PrimaryKeyJoinColumn
     private Account account;
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @JoinTable(name = "developer_skills", joinColumns = @JoinColumn(name = "developer_id"),
+            inverseJoinColumns = @JoinColumn(name = "skill_id"))
     private Set<Skill> skills;
 
     public Developer() {
@@ -29,9 +39,7 @@ public class Developer {
         this.skills = skills;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+
     public Long getId() {
         return id;
     }
@@ -40,7 +48,6 @@ public class Developer {
         this.id = id;
     }
 
-    @Column(name = "first_name")
     public String getFirstName() {
         return firstName;
     }
@@ -49,7 +56,6 @@ public class Developer {
         this.firstName = firstName;
     }
 
-    @Column(name = "last_name")
     public String getLastName() {
         return lastName;
     }
@@ -58,7 +64,6 @@ public class Developer {
         this.lastName = lastName;
     }
 
-    @Column(name = "specialty")
     public String getSpecialty() {
         return specialty;
     }
@@ -67,10 +72,6 @@ public class Developer {
         this.specialty = specialty;
     }
 
-
-    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-    @JoinTable(name = "developer_skills", joinColumns = @JoinColumn(name = "developer_id"),
-            inverseJoinColumns = @JoinColumn(name = "skill_id"))
     public Set<Skill> getSkills() {
         return skills;
     }
@@ -79,8 +80,6 @@ public class Developer {
         this.skills = skills;
     }
 
-    @NotFound(action = NotFoundAction.IGNORE)
-    @OneToOne(cascade = CascadeType.ALL)
     public Account getAccount() {
         return account;
     }

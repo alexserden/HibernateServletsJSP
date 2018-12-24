@@ -5,8 +5,11 @@ import javax.persistence.*;
 @Entity
 @Table(name = "skill")
 public class Skill {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
+    @Column(name = "name")
     private String name;
 
     public Skill() {
@@ -16,9 +19,7 @@ public class Skill {
         this.name = name;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+
     public Long getId() {
         return id;
     }
@@ -27,7 +28,6 @@ public class Skill {
         this.id = id;
     }
 
-    @Column(name = "name")
     public String getName() {
         return name;
     }

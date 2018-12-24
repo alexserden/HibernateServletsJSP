@@ -30,10 +30,11 @@ public class DeveloperRepositoryImpl implements DeveloperRepository {
     }
 
     public List<Developer> getAll() {
-        List<Developer> list;
+        List list;
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        list = (List<Developer>) session.createQuery("FROM Developer").list();
+        list = session.createQuery("FROM Developer").list();
+
         session.getTransaction().commit();
         session.close();
         return list;
