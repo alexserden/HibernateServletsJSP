@@ -15,9 +15,8 @@ public class Skill {
     public Skill() {
     }
 
-    public Skill(Long id,String name) {
+    public Skill(String name) {
         this.name = name;
-        this.id = id;
     }
 
 

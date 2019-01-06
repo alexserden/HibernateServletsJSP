@@ -21,7 +21,6 @@
     <property name="hibernate.connection.password">
       root
     </property>
-    <!-- DB schema will be updated if needed -->
     <mapping class="model.Developer"/>
     <mapping class="model.Account"/>
     <mapping class="model.Skill"/>
