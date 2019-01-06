@@ -1,6 +1,9 @@
 package model;
 
 
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -19,11 +22,11 @@ public class Developer {
     private String lastName;
     @Column(name = "specialty")
     private String specialty;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private Account account;
     @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-    @JoinTable(name = "developer_skills", joinColumns = @JoinColumn(name = "developer_id"),
+    @JoinTable(name = "developer_skill", joinColumns = @JoinColumn(name = "developer_id"),
             inverseJoinColumns = @JoinColumn(name = "skill_id"))
     private Set<Skill> skills;
 

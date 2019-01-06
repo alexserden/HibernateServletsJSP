@@ -14,7 +14,19 @@ public class DeveloperRepositoryImpl implements DeveloperRepository {
     private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
     public void create(Developer developer) {
-
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
+            session.beginTransaction();
+            session.save(developer);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println("error at create");
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
     }
 
     public Developer getById(Long aLong) {
