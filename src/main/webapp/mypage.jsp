@@ -39,6 +39,7 @@
      </table>
 
 
-    <input name="action" type="submit" value="Add Developer" />
+  <a href="addDeveloper.jsp">addDeveloper</a><br>
+<a href = "deleteDeveloper.jsp">deleteDeveloper</a>
   </body>
 </html>

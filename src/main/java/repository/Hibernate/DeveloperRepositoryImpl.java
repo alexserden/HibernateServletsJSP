@@ -29,7 +29,7 @@ public class DeveloperRepositoryImpl implements DeveloperRepository {
         }
     }
 
-    public Developer getById(Long aLong) {
+    public Developer getById(Long aLoidng) {
         return null;
     }
 
@@ -37,8 +37,21 @@ public class DeveloperRepositoryImpl implements DeveloperRepository {
 
     }
 
-    public void delete(Long aLong) {
+    public void delete(Long idDeveloper) {
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
+            session.beginTransaction();
+            session.createQuery("Delete Developer where id = idDeveloper").executeUpdate();
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println("error at create");
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
 
+        }
     }
 
     public List<Developer> getAll() {

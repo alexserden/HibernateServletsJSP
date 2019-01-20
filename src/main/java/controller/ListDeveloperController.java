@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+
 @WebServlet("/")
 public class ListDeveloperController extends HttpServlet {
 
@@ -18,7 +19,7 @@ public class ListDeveloperController extends HttpServlet {
             throws ServletException, IOException {
         DeveloperService developerService = new DeveloperService();
         List<Developer> list = developerService.getAll();
-        req.setAttribute("temp", list);
+        req.getSession().setAttribute("temp", list);
 
         req.getRequestDispatcher("mypage.jsp").forward(req, resp);
 
