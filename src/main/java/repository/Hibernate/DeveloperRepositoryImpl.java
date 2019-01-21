@@ -42,7 +42,8 @@ public class DeveloperRepositoryImpl implements DeveloperRepository {
         try {
             session = sessionFactory.openSession();
             session.beginTransaction();
-            session.createQuery("Delete Developer where id = idDeveloper").executeUpdate();
+            Developer developer = session.load(Developer.class,new Long(idDeveloper));
+            session.delete(developer);
             session.getTransaction().commit();
         } catch (Exception e) {
             System.out.println("error at create");
